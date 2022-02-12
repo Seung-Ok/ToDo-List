@@ -27,14 +27,22 @@
   </head>
   <body>
     <section class="todo">
-      <header class="header">To Do List !</header>
-      <input type="text" class="todo__input" />
-      <button type="button" class="todo__btn">
-        <i class="fa-light fa-calendar-plus"></i>
-      </button>
-      <ul class="todo__items">
-        <li>오늘 할 일은 ?</li>
-      </ul>
+      <header>To Do List !</header>
+      <article>
+        <input type="text" class="todo__input" />
+        <button type="button" class="todo__btn">
+          <i class="fa fa-calendar-plus"></i>
+        </button>
+        <ul class="todo__items">
+          <li class="item">
+            오늘 할 일은 ?
+            <button type="button" class="item__delete">
+              <i class="fa-regular fa-eraser"></i>
+            </button>
+          </li>
+        </ul>
+      </article>
+      <footer>현재시간</footer>
     </section>
   </body>
 </html>
