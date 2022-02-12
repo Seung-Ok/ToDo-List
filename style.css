@@ -1,0 +1,14 @@
+:root {
+  /* Font Weight */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-bold: 600;
+}
+
+body {
+  font-family: 'Nanum Brush Script', cursive;
+}
+
+.todo__btn {
+  font-family: 'fontAwesome';
+}
