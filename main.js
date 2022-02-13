@@ -6,10 +6,16 @@ const todoInput = document.querySelector('.todo__input');
 const todoItem = document.querySelector('.todo__items');
 const allDelete = document.querySelector('.footer__btn');
 
-// 사이트 load시 input focus
-window.onload = function () {
+// 사용자가 페이지 나가기 전에 입력한 정보 저장
+window.addEventListener('beforeunload', () => {
+  saveItem();
+});
+
+// 페이지 load되면 이전에 입력한 정보 출력
+window.addEventListener('load', () => {
   todoInput.focus();
-};
+  loadItem();
+});
 
 // 리스트 추가 - Enter
 todoInput.addEventListener('keyup', (event) => {
@@ -72,4 +78,13 @@ function add() {
 
 function deleteAllItem() {
   todoItem.innerHTML = '';
+}
+
+function saveItem() {
+  localStorage.setItem('todoItem', todoItem.innerHTML);
+}
+
+function loadItem() {
+  const loadItem = localStorage.getItem('todoItem');
+  todoItem.innerHTML = loadItem;
 }
