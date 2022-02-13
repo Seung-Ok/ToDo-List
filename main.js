@@ -40,9 +40,9 @@ allDelete.addEventListener('click', () => {
 // 아이템 등록
 function add() {
   const name = todoInput.value;
-  if (name === null) {
+  if (name === '') {
     alert('할 일을 입력해주세요');
-    todoInput.focus;
+    todoInput.focus();
     return;
   }
 
@@ -85,6 +85,8 @@ function createItem(text) {
 
 function deleteAllItem() {
   todoItem.innerHTML = '';
+  localStorage.clear();
+  todoInput.focus();
 }
 
 function saveItem() {
