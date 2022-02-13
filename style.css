@@ -147,13 +147,40 @@ article {
   justify-content: space-between;
 }
 
+.item__div {
+  display: flex;
+}
+
 .item__delete {
   color: var(--color-dark-blue);
   font-size: var(--font-medium);
   transition: all 300ms ease-in-out;
 }
 
-.item__delete:hover {
+.item__check {
+  color: var(--color-dark-blue);
+  font-size: var(--font-medium);
+  transition: all 300ms ease-in-out;
+  order: -1;
+}
+
+footer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.footer__btn {
+  font-size: var(--font-medium);
+  color: var(--color-dark-blue);
+  transition: all 300ms ease-in;
+}
+
+.footer__btn:hover {
+  transform: scale(1.3);
+}
+
+.item__delete:hover,
+.item__check:hover {
   background-color: var(--color-orange);
   border-radius: var(--border-size);
   transform: scale(1.3);
