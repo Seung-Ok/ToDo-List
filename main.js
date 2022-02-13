@@ -5,6 +5,18 @@ const todoBtn = document.querySelector('.todo__btn');
 const todoInput = document.querySelector('.todo__input');
 const todoItem = document.querySelector('.todo__items');
 const allDelete = document.querySelector('.footer__btn');
+const header = document.querySelector('.header');
+
+// 년/월/일 추가
+function clock() {
+  const clockTo = document.createElement('h3');
+  const clock = new Date();
+  const year = clock.getFullYear();
+  const month = clock.getMonth() + 1;
+  const date = clock.getDate();
+  clockTo.innerText = `${year}년 ${month}월 ${date}일`;
+  header.appendChild(clockTo);
+}
 
 // 사용자가 페이지 나가기 전에 입력한 정보 저장
 window.addEventListener('beforeunload', () => {
@@ -13,6 +25,7 @@ window.addEventListener('beforeunload', () => {
 
 // 페이지 load되면 이전에 입력한 정보 출력
 window.addEventListener('load', () => {
+  clock();
   todoInput.focus();
   loadItem();
 });
