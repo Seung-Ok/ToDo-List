@@ -1,10 +1,13 @@
 :root {
   /* Color */
   --color-white: #ffffff;
+  --color-dark-white: #ddd;
   --color-black: #000000;
   --color-dark-grey: #696363;
+  --color-light-grey: #727272;
   --color-dark-blue: #004066;
   --color-orange: #fca80d;
+  --color-red: #de1738;
 
   /* Font Weight */
   --weight-regular: 400;
@@ -46,6 +49,7 @@ button {
 
 ul {
   padding: 0;
+  margin: 0;
 }
 
 li {
@@ -150,28 +154,29 @@ article {
   padding: 1rem 3rem;
 }
 
-.item__div {
+.item {
   display: flex;
   justify-content: space-between;
 }
 
-.item__delete {
+.item__div button {
+  padding: 0 2rem;
+}
+
+.item__delete,
+.item__cancle,
+.delete__btn,
+.recover__btn {
   color: var(--color-dark-blue);
   font-size: var(--font-medium);
   transition: all 300ms ease-in-out;
 }
 
-.item__delete:hover {
+.item__delete:hover,
+.item__cancle:hover {
   background-color: var(--color-orange);
   border-radius: var(--border-size);
   transform: scale(1.3);
-}
-
-.item__check {
-  color: var(--color-dark-blue);
-  font-size: var(--font-medium);
-  transition: all 300ms ease-in-out;
-  order: -1;
 }
 
 footer {
@@ -179,12 +184,13 @@ footer {
   justify-content: space-around;
 }
 
-.footer__btn {
-  font-size: var(--font-medium);
-  color: var(--color-dark-blue);
-  transition: all 300ms ease-in;
+.delete__btn:hover,
+.recover__btn:hover {
+  transform: scale(1.3);
 }
 
-.footer__btn:hover {
-  transform: scale(1.3);
+.item.line {
+  color: var(--color-light-grey);
+  background-color: var(--color-dark-white);
+  text-decoration: line-through solid var(--color-red) 0.3rem;
 }

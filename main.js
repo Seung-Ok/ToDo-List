@@ -4,10 +4,10 @@
 const todoBtn = document.querySelector('.todo__btn');
 const todoInput = document.querySelector('.todo__input');
 const todoItem = document.querySelector('.todo__items');
-const allDelete = document.querySelector('.footer__btn');
+const allDelete = document.querySelector('.delete__btn');
 const header = document.querySelector('.header');
 
-// 년/월/일 추가
+// 시계
 function clock() {
   const clockTo = document.createElement('h3');
   const clock = new Date();
@@ -44,7 +44,9 @@ todoBtn.addEventListener('click', add);
 
 // 등록한 아이템 전부 삭제
 allDelete.addEventListener('click', () => {
-  if (!confirm('전부 삭제할까요?')) {
+  if (
+    !confirm('전부 삭제하면 복구할 수 없습니다. 정말 삭제할까요?')
+  ) {
     return;
   }
   deleteAllItem();
@@ -62,7 +64,7 @@ function add() {
   const newItem = createItem(name);
   todoItem.appendChild(newItem);
 
-  newItem.scrollIntoView({ behavior: 'smooth' });
+  newItem.scrollIntoView();
   todoInput.focus();
   todoInput.value = null;
 }
@@ -78,6 +80,7 @@ function createItem(text) {
   name.setAttribute('class', 'item__name');
   name.innerText = text;
 
+  // 아이템 삭제
   const removeBtn = document.createElement('button');
   removeBtn.setAttribute('class', 'item__delete');
   removeBtn.innerHTML = `<i class="fa-regular fa-eraser"></i>`;
@@ -86,11 +89,26 @@ function createItem(text) {
       return;
     } else {
       todoList.remove();
+      todoInput.focus();
     }
   });
 
+  // 아이템 취소선
+  const cancleBtn = document.createElement('button');
+  cancleBtn.setAttribute('class', 'item__cancle');
+  cancleBtn.innerHTML = `<i class="far fa-calendar-check"></i>`;
+  cancleBtn.addEventListener('click', () => {
+    if (!confirm('정말로 다 하셨나요..? ㅎㅎ')) {
+      return;
+    } else {
+      cancleBtn.parentNode.parentNode.classList.toggle('line');
+      todoInput.focus();
+    }
+  });
+
+  todoList.appendChild(name);
   todoList.appendChild(itemDiv);
-  itemDiv.appendChild(name);
+  itemDiv.appendChild(cancleBtn);
   itemDiv.appendChild(removeBtn);
 
   return todoList;
