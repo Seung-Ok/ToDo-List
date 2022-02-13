@@ -37,43 +37,50 @@ allDelete.addEventListener('click', () => {
   deleteAllItem();
 });
 
+// 아이템 등록
 function add() {
-  // 아이템 생성
-  const todoList = document.createElement('li');
-  todoList.setAttribute('class', 'item');
-  todoItem.appendChild(todoList);
-
-  const name = document.createElement('span');
-  name.setAttribute('class', 'item__name');
-  name.innerHTML = todoInput.value;
-  todoList.appendChild(name);
-
-  const itemDiv = document.createElement('div');
-  itemDiv.setAttribute('class', 'item__div');
-  todoList.appendChild(itemDiv);
-
-  // 스크롤링시 list 따라감
-  todoList.scrollIntoView({ behavior: 'smooth' });
-
-  // input에 아무 값도 입력하지 않으면 팝업창 띄우고 종료
-  if (todoInput.value === '') {
+  const name = todoInput.value;
+  if (name === null) {
     alert('할 일을 입력해주세요');
-    todoInput.focus();
+    todoInput.focus;
     return;
   }
 
-  // input 입력 후 초기화 + focus
+  const newItem = createItem(name);
+  todoItem.appendChild(newItem);
+
+  newItem.scrollIntoView({ behavior: 'smooth' });
   todoInput.focus();
   todoInput.value = null;
+}
 
-  // 아이템 삭제
+function createItem(text) {
+  const todoList = document.createElement('li');
+  todoList.setAttribute('class', 'item');
+
+  const itemDiv = document.createElement('div');
+  itemDiv.setAttribute('class', 'item__div');
+
+  const name = document.createElement('span');
+  name.setAttribute('class', 'item__name');
+  name.innerText = text;
+
   const removeBtn = document.createElement('button');
   removeBtn.setAttribute('class', 'item__delete');
   removeBtn.innerHTML = `<i class="fa-regular fa-eraser"></i>`;
-  itemDiv.appendChild(removeBtn);
   removeBtn.addEventListener('click', () => {
-    todoList.remove();
+    if (!confirm(`${text}를 정말 삭제하시겠어요?`)) {
+      return;
+    } else {
+      todoList.remove();
+    }
   });
+
+  todoList.appendChild(itemDiv);
+  itemDiv.appendChild(name);
+  itemDiv.appendChild(removeBtn);
+
+  return todoList;
 }
 
 function deleteAllItem() {
