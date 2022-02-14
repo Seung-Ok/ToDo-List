@@ -101,14 +101,14 @@ function createItem(text) {
     if (!confirm('정말로 다 하셨나요..? ㅎㅎ')) {
       return;
     } else {
-      cancleBtn.parentNode.parentNode.classList.toggle('line');
+      cancleBtn.nextSibling.classList.toggle('line');
       todoInput.focus();
     }
   });
 
-  todoList.appendChild(name);
   todoList.appendChild(itemDiv);
   itemDiv.appendChild(cancleBtn);
+  itemDiv.appendChild(name);
   itemDiv.appendChild(removeBtn);
 
   return todoList;
