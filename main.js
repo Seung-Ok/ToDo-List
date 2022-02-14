@@ -6,6 +6,27 @@ const todoInput = document.querySelector('.todo__input');
 const todoItem = document.querySelector('.todo__items');
 const allDelete = document.querySelector('.delete__btn');
 const header = document.querySelector('.header');
+const recoverBtn = document.querySelector('.recover__btn');
+let deleteItem = [];
+
+// 아이템 복구
+recoverBtn.addEventListener('click', () => {
+  const recoverItem = localStorage.getItem('deleteItem');
+  if (recoverItem === null) {
+    alert('삭제 내역이 없습니다');
+    todoInput.focus();
+    return;
+  }
+  if (confirm('이전 삭제내역을 복구하시겠습니까?')) {
+    const recover = recoverItem.replace(/,/g, '');
+    todoItem.insertAdjacentHTML('beforeend', recover);
+    deleteItem.length = 0;
+    localStorage.removeItem('deleteItem');
+    todoInput.focus();
+  } else {
+    todoInput.focus();
+  }
+});
 
 // 시계
 function clock() {
@@ -45,18 +66,22 @@ todoBtn.addEventListener('click', add);
 // 등록한 아이템 전부 삭제
 allDelete.addEventListener('click', () => {
   if (
-    !confirm('전부 삭제하면 복구할 수 없습니다. 정말 삭제할까요?')
+    !confirm(
+      '전부 삭제하면 복구할 수 없습니다. 정말 삭제하시겠습니까?'
+    )
   ) {
+    todoInput.focus();
     return;
+  } else {
+    deleteAllItem();
   }
-  deleteAllItem();
 });
 
 // 아이템 등록
 function add() {
   const name = todoInput.value;
   if (name === '') {
-    alert('할 일을 입력해주세요');
+    alert('할 일을 입력하세요');
     todoInput.focus();
     return;
   }
@@ -85,9 +110,12 @@ function createItem(text) {
   removeBtn.setAttribute('class', 'item__delete');
   removeBtn.innerHTML = `<i class="fa-regular fa-eraser"></i>`;
   removeBtn.addEventListener('click', () => {
-    if (!confirm(`${text}를 정말 삭제하시겠어요?`)) {
+    if (!confirm(`${text}를 정말 삭제하시겠습니까?`)) {
+      todoInput.focus();
       return;
     } else {
+      deleteItem.push(todoList.innerHTML);
+      localStorage.setItem('deleteItem', deleteItem);
       todoList.remove();
       todoInput.focus();
     }
@@ -98,7 +126,8 @@ function createItem(text) {
   cancleBtn.setAttribute('class', 'item__cancle');
   cancleBtn.innerHTML = `<i class="far fa-calendar-check"></i>`;
   cancleBtn.addEventListener('click', () => {
-    if (!confirm('정말로 다 하셨나요..? ㅎㅎ')) {
+    if (!confirm('정말로 다 하셨습니까?')) {
+      todoInput.focus();
       return;
     } else {
       cancleBtn.nextSibling.classList.toggle('line');
