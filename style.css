@@ -8,6 +8,7 @@
   --color-dark-blue: #004066;
   --color-orange: #fca80d;
   --color-red: #de1738;
+  --color-green: #55fa55;
 
   /* Font Weight */
   --weight-regular: 400;
@@ -174,6 +175,17 @@ article {
   left: 0;
 }
 
+.item__name {
+  cursor: pointer;
+  transition: all 300ms ease-in-out;
+}
+
+.item__name:hover {
+  background-color: var(--color-green);
+  border-radius: var(--border-size);
+  transform: scale(1.1);
+}
+
 .item__name.line {
   color: var(--color-light-grey);
   background-color: var(--color-dark-white);
@@ -183,7 +195,8 @@ article {
 .item__delete,
 .item__cancle,
 .delete__btn,
-.recover__btn {
+.recover__btn,
+.update__btn {
   color: var(--color-dark-blue);
   font-size: var(--font-medium);
   transition: all 300ms ease-in-out;
@@ -202,6 +215,7 @@ footer {
 }
 
 .delete__btn:hover,
-.recover__btn:hover {
+.recover__btn:hover,
+.update__btn:hover {
   transform: scale(1.3);
 }

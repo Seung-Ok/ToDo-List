@@ -5,9 +5,48 @@ const todoBtn = document.querySelector('.todo__btn');
 const todoInput = document.querySelector('.todo__input');
 const todoItem = document.querySelector('.todo__items');
 const allDelete = document.querySelector('.delete__btn');
-const header = document.querySelector('.header');
 const recoverBtn = document.querySelector('.recover__btn');
+const updateBtn = document.querySelector('.update__btn');
+const header = document.querySelector('.header');
 let deleteItem = [];
+
+// 입력한 정보 저장
+window.addEventListener('beforeunload', () => {
+  saveItem();
+});
+
+// 저장된 정보 유지
+window.addEventListener('load', () => {
+  clock();
+  todoInput.focus();
+  loadItem();
+});
+
+// 리스트 추가 1. Enter
+todoInput.addEventListener('keyup', (event) => {
+  if (!(event.key === 'Enter')) {
+    return;
+  } else {
+    add();
+  }
+});
+
+// 리스트 추가 2. + 버튼
+todoBtn.addEventListener('click', add);
+
+// 아이템 전부 삭제
+allDelete.addEventListener('click', () => {
+  if (
+    !confirm(
+      '전부 삭제하면 복구할 수 없습니다. 정말 삭제하시겠습니까?'
+    )
+  ) {
+    todoInput.focus();
+    return;
+  } else {
+    deleteAllItem();
+  }
+});
 
 // 아이템 복구
 recoverBtn.addEventListener('click', () => {
@@ -29,41 +68,28 @@ recoverBtn.addEventListener('click', () => {
   }
 });
 
-// 입력한 정보 저장
-window.addEventListener('beforeunload', () => {
-  saveItem();
+// 텍스트 수정
+updateBtn.addEventListener('click', () => {
+  alert('수정하고 싶은 텍스트를 더블클릭 하세요');
 });
 
-// 저장된 정보 유지
-window.addEventListener('load', () => {
-  clock();
-  todoInput.focus();
-  loadItem();
-});
-
-// 리스트 추가 - Enter
-todoInput.addEventListener('keyup', (event) => {
-  if (!(event.key === 'Enter')) {
-    return;
-  } else {
-    add();
-  }
-});
-
-// 리스트 추가 - (+) 버튼
-todoBtn.addEventListener('click', add);
-
-// 아이템 전부 삭제
-allDelete.addEventListener('click', () => {
-  if (
-    !confirm(
-      '전부 삭제하면 복구할 수 없습니다. 정말 삭제하시겠습니까?'
-    )
-  ) {
-    todoInput.focus();
-    return;
-  } else {
-    deleteAllItem();
+// 텍스트 수정
+todoItem.addEventListener('dblclick', (event) => {
+  if (event.target.classList.contains('item__name')) {
+    const text = event.target
+      .closest('div')
+      .querySelector('.item__name');
+    const renameText = prompt(
+      '텍스트를 수정합니다',
+      text.textContent
+    );
+    if (renameText === null) {
+      todoInput.focus();
+      return;
+    } else {
+      text.textContent = renameText;
+      todoInput.focus();
+    }
   }
 });
 
