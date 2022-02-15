@@ -17,34 +17,24 @@ recoverBtn.addEventListener('click', () => {
     todoInput.focus();
     return;
   }
+
   if (confirm('이전 삭제내역을 복구하시겠습니까?')) {
     const recover = recoverItem.replace(/,/g, '');
     todoItem.insertAdjacentHTML('beforeend', recover);
-    deleteItem.length = 0;
     localStorage.removeItem('deleteItem');
+    deleteItem = [];
     todoInput.focus();
   } else {
     todoInput.focus();
   }
 });
 
-// 시계
-function clock() {
-  const clockTo = document.createElement('h3');
-  const clock = new Date();
-  const year = clock.getFullYear();
-  const month = clock.getMonth() + 1;
-  const date = clock.getDate();
-  clockTo.innerText = `${year}년 ${month}월 ${date}일`;
-  header.appendChild(clockTo);
-}
-
-// 사용자가 페이지 나가기 전에 입력한 정보 저장
+// 입력한 정보 저장
 window.addEventListener('beforeunload', () => {
   saveItem();
 });
 
-// 페이지 load되면 이전에 입력한 정보 출력
+// 저장된 정보 유지
 window.addEventListener('load', () => {
   clock();
   todoInput.focus();
@@ -63,7 +53,7 @@ todoInput.addEventListener('keyup', (event) => {
 // 리스트 추가 - (+) 버튼
 todoBtn.addEventListener('click', add);
 
-// 등록한 아이템 전부 삭제
+// 아이템 전부 삭제
 allDelete.addEventListener('click', () => {
   if (
     !confirm(
@@ -114,14 +104,16 @@ function createItem(text) {
       todoInput.focus();
       return;
     } else {
-      deleteItem.push(todoList.innerHTML);
+      // 삭제하기전 복사
+      const recoverItem = todoList.cloneNode(true);
+      deleteItem.push(recoverItem.outerHTML);
       localStorage.setItem('deleteItem', deleteItem);
       todoList.remove();
       todoInput.focus();
     }
   });
 
-  // 아이템 취소선
+  // 텍스트 취소선
   const cancleBtn = document.createElement('button');
   cancleBtn.setAttribute('class', 'item__cancle');
   cancleBtn.innerHTML = `<i class="far fa-calendar-check"></i>`;
@@ -156,4 +148,15 @@ function saveItem() {
 function loadItem() {
   const loadItem = localStorage.getItem('todoItem');
   todoItem.innerHTML = loadItem;
+}
+
+// 날짜
+function clock() {
+  const clockTo = document.createElement('h3');
+  const clock = new Date();
+  const year = clock.getFullYear();
+  const month = clock.getMonth() + 1;
+  const date = clock.getDate();
+  clockTo.innerText = `${year}년 ${month}월 ${date}일`;
+  header.appendChild(clockTo);
 }
