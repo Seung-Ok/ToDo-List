@@ -77,7 +77,7 @@ updateBtn.addEventListener('click', () => {
 todoItem.addEventListener('dblclick', (event) => {
   if (event.target.classList.contains('item__name')) {
     const text = event.target
-      .closest('div')
+      .closest('li')
       .querySelector('.item__name');
     const renameText = prompt(
       '텍스트를 수정합니다',
@@ -144,18 +144,13 @@ function createItem(text) {
   cancleBtn.setAttribute('class', 'item__cancle');
   cancleBtn.innerHTML = `<i class="far fa-calendar-check"></i>`;
   cancleBtn.addEventListener('click', () => {
-    if (!confirm('정말로 다 하셨습니까?')) {
-      todoInput.focus();
-      return;
-    } else {
-      cancleBtn.nextSibling.classList.toggle('line');
-      todoInput.focus();
-    }
+    cancleBtn.parentNode.previousSibling.classList.toggle('line');
+    todoInput.focus();
   });
 
+  todoList.appendChild(name);
   todoList.appendChild(itemDiv);
   itemDiv.appendChild(cancleBtn);
-  itemDiv.appendChild(name);
   itemDiv.appendChild(removeBtn);
 
   return todoList;
