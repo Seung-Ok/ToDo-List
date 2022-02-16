@@ -1,12 +1,11 @@
 # :seedling: ToDo-List
  
- 
 # :muscle: Skill
 <p><a href = "#">
-<img src= "https://img.shields.io/badge/-HTML5-%23E34F26?logo=html5&logoColor=white&style=plastic&logoWidth=15"> &nbsp
-<img src= "https://img.shields.io/badge/-CSS-%231572B6?logo=css3&logoColor=white&style=plastic&logoWidth=15"> &nbsp
-<img src= "https://img.shields.io/badge/-JavaScript-%23F7DF12?logo=javascript&logoColor=white&style=plastic&logoWidth=15">
-</a></p>
+<img src= "https://img.shields.io/badge/-HTML5-%23E34F26?logo=html5&logoColor=white&style=plastic&logoWidth=15"></a> &nbsp
+<img src= "https://img.shields.io/badge/-CSS-%231572B6?logo=css3&logoColor=white&style=plastic&logoWidth=15"></a> &nbsp
+<img src= "https://img.shields.io/badge/-JavaScript-%23F7DF12?logo=javascript&logoColor=white&style=plastic&logoWidth=15"></a>
+</p>
 
 # :bulb: Function
 :pencil2: 입력하기 (Enter, Click)<br><br>
@@ -46,4 +45,4 @@
 # :bug: Bugs
 
 # :mailbox_with_mail: Contact
-- <a href=https://velog.io/@ssket target="_blank">My velog</a>
+- <a href=https://velog.io/@ssket>My velog</a>
