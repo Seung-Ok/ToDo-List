@@ -26,7 +26,11 @@ window.addEventListener('load', () => {
 // 아이템 등록
 form.addEventListener('click', (evnet) => {
   event.preventDefault();
-  add();
+  if (event.target.tagName === 'INPUT') {
+    return;
+  } else {
+    add();
+  }
 });
 
 // 아이템 전부 삭제

@@ -34,8 +34,14 @@ html {
 }
 
 body {
+  background: rgb(211, 204, 227);
+  background: linear-gradient(
+    166deg,
+    rgba(211, 204, 227, 1) 0%,
+    rgba(233, 228, 240, 1) 50%
+  );
+  background-attachment: fixed;
   font-family: 'Nanum Brush Script', cursive;
-  background-color: wheat;
   text-align: center;
   margin: 0;
 }
@@ -165,7 +171,7 @@ article {
   margin-top: 1rem;
 }
 
-.item__div ::after {
+.item__div::after {
   position: absolute;
   content: '';
   border: 0.01rem solid #0066cc;
@@ -178,7 +184,7 @@ article {
   cursor: pointer;
   transition: all 300ms ease-in-out;
   order: 1;
-  padding-left: 2rem;
+  margin-left: 2rem;
   align-self: center;
 }
 
