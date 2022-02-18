@@ -40,9 +40,14 @@
 - flex, max-width : 768px<br><br>
 
 # :bulb: Refactoring
+- 코드 간결화<br>
+22/02/18 : 아이템 등록 코드 간결화 
 
 
 # :bug: Bugs
+22/02/18<br>
+1. 아이템 삭제, 체크 버튼 밑에 선 생기는 오류 발견 - 수정 예정
+2. 새로고침 or 페이지 나가고 다시 들어왔을 때 데이터는 유지되나 기능 동작 안하는 오류 발견 - 수정 예정
 
 # :mailbox_with_mail: Contact
 - <a href=https://velog.io/@ssket>My velog</a>
