@@ -2,6 +2,7 @@
 
 // 선택자 할당
 const todoBtn = document.querySelector('.todo__btn');
+const form = document.querySelector('.form');
 const todoInput = document.querySelector('.todo__input');
 const todoItem = document.querySelector('.todo__items');
 const allDelete = document.querySelector('.delete__btn');
@@ -22,17 +23,11 @@ window.addEventListener('load', () => {
   loadItem();
 });
 
-// 리스트 추가 1. Enter
-todoInput.addEventListener('keyup', (event) => {
-  if (!(event.key === 'Enter')) {
-    return;
-  } else {
-    add();
-  }
+// 아이템 등록
+form.addEventListener('click', (evnet) => {
+  event.preventDefault();
+  add();
 });
-
-// 리스트 추가 2. + 버튼
-todoBtn.addEventListener('click', add);
 
 // 아이템 전부 삭제
 allDelete.addEventListener('click', () => {
@@ -139,7 +134,7 @@ function createItem(text) {
     }
   });
 
-  // 텍스트 취소선
+  // 아이템 체크
   const cancleBtn = document.createElement('button');
   cancleBtn.setAttribute('class', 'item__cancle');
   cancleBtn.innerHTML = `<i class="far fa-calendar-check"></i>`;
