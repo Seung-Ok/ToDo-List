@@ -250,7 +250,7 @@ footer {
   .item__name {
     word-break: break-all;
     order: 1;
-    margin-top: 0.3rem;
+    margin: 0.3rem 0 0 0;
     padding: 0;
   }
 }

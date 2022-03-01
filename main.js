@@ -40,7 +40,6 @@ form.addEventListener('click', (evnet) => {
   if (event.target.tagName === 'INPUT') {
     return;
   } else {
-      todoInput.focus();
     addItem();
   }
 });
@@ -73,33 +72,15 @@ function createItem(text) {
   name.setAttribute('class', 'item__name');
   name.innerText = text;
 
-  // Delete Item
+  // Remove Item
   const removeBtn = document.createElement('button');
   removeBtn.setAttribute('class', 'item__delete');
   removeBtn.innerHTML = `<i class="fa-regular fa-eraser"></i>`;
-  removeBtn.addEventListener('click', () => {
-    if (!confirm(`${text}를 정말 삭제하시겠습니까?`)) {
-      todoInput.focus();
-      return;
-    } else {
-      // Copy Item
-      const copyItem = todoList.cloneNode(true);
-      console.log(copyItem);
-      deleteItem.push(copyItem.outerHTML);
-      localStorage.setItem('deleteItem', deleteItem);
-      todoList.remove();
-      todoInput.focus();
-    }
-  });
 
   // Check Item
   const checkBtn = document.createElement('button');
   checkBtn.setAttribute('class', 'item__cancle');
   checkBtn.innerHTML = `<i class="far fa-calendar-check"></i>`;
-  checkBtn.addEventListener('click', () => {
-    checkBtn.parentNode.previousSibling.classList.toggle('line');
-    todoInput.focus();
-  });
 
   todoList.appendChild(name);
   todoList.appendChild(itemDiv);
@@ -108,6 +89,59 @@ function createItem(text) {
 
   return todoList;
 }
+
+// Event Binding
+todoItem.addEventListener('click', (event) => {
+  const itemCheck = event.target.classList.contains(
+    'fa-calendar-check'
+  );
+  const itemModify = event.target.classList.contains('item__name');
+  const itemRemove = event.target.classList.contains('fa-eraser');
+
+  if (!(itemCheck || itemModify || itemRemove)) {
+    return;
+  }
+
+  // Check Item
+  if (itemCheck) {
+    event.target.closest('.item').firstChild.classList.toggle('line');
+  }
+
+  // Modify Item
+  if (itemModify) {
+    const text = event.target;
+    const newText = prompt('텍스트를 수정합니다', text.textContent);
+    if (newText.trim() === '') {
+      alert('공백으로의 수정은 불가능합니다');
+      todoInput.focus();
+      return;
+    } else {
+      text.textContent = newText;
+      todoInput.focus();
+    }
+  }
+
+  // Remove Item
+  if (itemRemove) {
+    if (!confirm('정말 삭제하시겠습니까?')) {
+      todoInput.focus();
+      return;
+    }
+    // Copy Item
+    else {
+      const cloneItem = event.target.closest('.item').cloneNode(true);
+      deleteItem.push(cloneItem.outerHTML);
+      localStorage.setItem('deleteItem', deleteItem);
+      event.target.closest('.item').remove();
+      todoInput.focus();
+    }
+  }
+});
+
+// Modify Item
+modifyBtn.addEventListener('click', () => {
+  alert('수정하고 싶은 텍스트를 클릭 하세요');
+});
 
 // Delete All Items
 allDelete.addEventListener('click', () => {
@@ -122,6 +156,13 @@ allDelete.addEventListener('click', () => {
     deleteAllItem();
   }
 });
+
+// Delete All Items
+function deleteAllItem() {
+  todoItem.innerHTML = '';
+  localStorage.clear();
+  todoInput.focus();
+}
 
 // Recovery Item
 recoverBtn.addEventListener('click', () => {
@@ -140,39 +181,6 @@ recoverBtn.addEventListener('click', () => {
     todoInput.focus();
   } else {
     todoInput.focus();
-  }
-});
-
-// Delete All Items
-function deleteAllItem() {
-  todoItem.innerHTML = '';
-  localStorage.clear();
-  todoInput.focus();
-}
-
-// Modify Text
-modifyBtn.addEventListener('click', () => {
-  alert('수정하고 싶은 텍스트를 더블클릭 하세요');
-});
-
-// Modify Text
-todoItem.addEventListener('dblclick', (event) => {
-  if (!event.target.classList.contains('item__name')) {
-    return;
-  } else {
-    const text = event.target;
-    const modifyText = prompt(
-      '텍스트를 수정합니다',
-      text.textContent
-    );
-    if (modifyText.trim() === '') {
-      alert('공백으로의 수정은 불가능합니다');
-      todoInput.focus();
-      return;
-    } else {
-      text.textContent = modifyText;
-      todoInput.focus();
-    }
   }
 });
 
