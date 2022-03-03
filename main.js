@@ -92,11 +92,14 @@ function createItem(text) {
 
 // Event Binding
 todoItem.addEventListener('click', (event) => {
-  const itemCheck = event.target.classList.contains(
-    'fa-calendar-check'
-  );
-  const itemModify = event.target.classList.contains('item__name');
-  const itemRemove = event.target.classList.contains('fa-eraser');
+  const target = event.target;
+  const itemCheck =
+    target.classList.contains('fa-calendar-check') ||
+    target.classList.contains('item__cancle');
+  const itemModify = target.classList.contains('item__name');
+  const itemRemove =
+    target.classList.contains('fa-eraser') ||
+    target.classList.contains('item__delete');
 
   if (!(itemCheck || itemModify || itemRemove)) {
     return;
@@ -111,6 +114,9 @@ todoItem.addEventListener('click', (event) => {
   if (itemModify) {
     const text = event.target;
     const newText = prompt('텍스트를 수정합니다', text.textContent);
+    if (newText === null) {
+      return;
+    }
     if (newText.trim() === '') {
       alert('공백으로의 수정은 불가능합니다');
       todoInput.focus();
