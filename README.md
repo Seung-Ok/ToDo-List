@@ -40,13 +40,21 @@
 - flex, max-width : 768px<br><br>
 
 # :bulb: Refactoring
-- 02/18 : Simplify Add Item Code
+- 02/18 : Simplify Add Item Code<br>
+- 03/03 : 동적으로 추가한 버튼 클릭 영역 전체 영역으로 확대
+<br>
+
+> 추가적으로 개선하고 싶은 사항<br><br>  1. element 순서에 의존하는 NODE 접근 코드가 많아서 element 순서에 의존 안하게 코드를 짜고 싶다 (동작 오류는 없음)<br><br>2. if문이 많아서 코드가 다소 길어지고 가독성이 떨어지는 것 같아 간결화 시키고 싶다 (동작 오류는 없음)
 
 # :bug: Bugs
 - 02/18<br>
-1. 아이템 개별 삭제, 체크 버튼 아래 선 생기는 오류 수정
+> 1. 아이템 개별 삭제, 체크 버튼 아래 선 생기는 오류 발견<br><br>
+`CSS 선택자 수정으로 오류 수정`
+<br>
 
-2. localStorage를 사용하여 페이지 reload시 데이터는 유지되나 아이템을 동적으로 추가해줬기 때문에 아이템 삭제, 체크 버튼이 동작 안하는 오류 발견 - 수정 예정,,
+- 03/03<br>
+> 1. 페이지 reload시 데이터는 유지되나 개별 삭제, 체크 버튼이 동작 안하는 오류 발견<br><br>
+`동적 이벤트 바인딩으로 오류 수정`
 
 # :mailbox_with_mail: Contact
 - <a href=https://velog.io/@ssket>My velog</a>
